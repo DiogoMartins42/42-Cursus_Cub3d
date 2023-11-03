@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:59:11 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/02 17:24:46 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/03 19:39:42 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ typedef struct s_map
 	char		*SO;
 	char		*WE;
 	char		*EA;
+	char 		*floor_color;
+	char 		*ceiling_color;
 }				t_map;
 
 bool	validate_map(char *file);

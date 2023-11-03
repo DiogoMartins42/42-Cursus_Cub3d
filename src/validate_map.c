@@ -6,16 +6,56 @@
 /*   By: dreis-ma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:47:14 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/02 20:06:06 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/03 20:06:20 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-/*void	add_elements(t_map *map, char *line)
+bool	check_invalid_line(char *line)
 {
+	int	i;
 
-}*/
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+bool	check_map_start(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] == ' ')
+		i++;
+	if (line[i] == '1')
+		return (true);
+	return (false);
+}
+
+bool	add_elements(t_map *map, char *line)
+{
+	if (ft_strnstr(line, "NO ./", 5))
+		map->NO = ft_strtrim(line, "NO ./");
+	else if (ft_strnstr(line, "SO ./", 5))
+		map->NO = ft_strtrim(line, "SO ./");
+	else if (ft_strnstr(line, "WE ./", 5))
+		map->NO = ft_strtrim(line, "WE ./");
+	else if (ft_strnstr(line, "EA ./", 5))
+		map->NO = ft_strtrim(line, "EA ./");
+	else if (ft_strnstr(line, "F ", 2))
+		map->floor_color = ft_strtrim(line, "F ");
+	else if (ft_strnstr(line, "C ", 2))
+		map->ceiling_color = ft_strtrim(line, "C ");
+	else
+		return (false);
+	return (true);
+}
 
 int	read_map(int fd, t_map *map)
 {
@@ -29,7 +69,19 @@ int	read_map(int fd, t_map *map)
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-	//	add_elements(map, line);
+		if (!add_elements(map, line))
+		{
+			if (check_map_start(line))
+			{
+				printf("MAP STARTS!\n");
+				break ;
+			}
+			if (check_invalid_line(line))
+			{
+				printf("Error\n\033[1;31mThe map contains invalid elements\033[0m\n");
+				return (-1);
+			}
+		}
 		/*map->width = check_width(line, map->width);
 		if (map->width == 0)
 			res = 2;
