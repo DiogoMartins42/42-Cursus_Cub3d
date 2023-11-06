@@ -6,7 +6,7 @@
 #    By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 17:08:21 by dreis-ma          #+#    #+#              #
-#    Updated: 2023/11/02 20:06:35 by dreis-ma         ###   ########.fr        #
+#    Updated: 2023/11/06 16:27:09 by dreis-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
 DEPS = libft/libft.a
 
-SRC = src/main.c src/validate_map.c
+SRC = src/main.c src/validate_file.c src/validate_file_utils.c \
+src/validate_map.c src/map_cleanup.c
 
 OBJ = $(SRC:.c=.o)
 

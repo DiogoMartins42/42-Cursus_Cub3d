@@ -3,157 +3,103 @@
 /*                                                        :::      ::::::::   */
 /*   validate_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dreis-ma <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/02 15:47:14 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/03 20:06:20 by dreis-ma         ###   ########.fr       */
+/*   Created: 2023/11/06 16:15:25 by dreis-ma          #+#    #+#             */
+/*   Updated: 2023/11/06 20:48:16 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-bool	check_invalid_line(char *line)
+/*char	**save_map(char *map_file, t_map *map)
+{
+	int		fd;
+	char	**map_array;
+	char	*line;
+	int		i;
+
+	i = 0;
+	fd = open(map_file, O_RDONLY);
+	map_array = malloc(map->height * sizeof(char *));
+	if (!map_array)
+		return (0);
+	while (1)
+	{
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		map_array[i] = line;
+		i++;
+	}
+	close(fd);
+	return (map_array);
+}*/
+
+bool	validate_characters(char *line)
 {
 	int	i;
 
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '\n')
-			return (true);
-		i++;
+		if (line[i] == '0' || line[i] == '1' || line[i] == 'N'
+			|| line[i] == 'S' || line[i] == 'E' || line[i] == 'W'
+			|| line[i] == ' '|| line[i] == '\n')
+			i++;
+		else
+			return (false);
 	}
-	return (false);
-}
-
-bool	check_map_start(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i] && line[i] == ' ')
-		i++;
-	if (line[i] == '1')
-		return (true);
-	return (false);
-}
-
-bool	add_elements(t_map *map, char *line)
-{
-	if (ft_strnstr(line, "NO ./", 5))
-		map->NO = ft_strtrim(line, "NO ./");
-	else if (ft_strnstr(line, "SO ./", 5))
-		map->NO = ft_strtrim(line, "SO ./");
-	else if (ft_strnstr(line, "WE ./", 5))
-		map->NO = ft_strtrim(line, "WE ./");
-	else if (ft_strnstr(line, "EA ./", 5))
-		map->NO = ft_strtrim(line, "EA ./");
-	else if (ft_strnstr(line, "F ", 2))
-		map->floor_color = ft_strtrim(line, "F ");
-	else if (ft_strnstr(line, "C ", 2))
-		map->ceiling_color = ft_strtrim(line, "C ");
-	else
-		return (false);
 	return (true);
 }
 
-int	read_map(int fd, t_map *map)
+int	check_width(char *line)
 {
-	char	*line;
-	int		res;
-	(void)map;
-
-	res = 1;
-	while (1)
-	{
-		line = get_next_line(fd);
-		if (line == NULL)
-			break ;
-		if (!add_elements(map, line))
-		{
-			if (check_map_start(line))
-			{
-				printf("MAP STARTS!\n");
-				break ;
-			}
-			if (check_invalid_line(line))
-			{
-				printf("Error\n\033[1;31mThe map contains invalid elements\033[0m\n");
-				return (-1);
-			}
-		}
-		/*map->width = check_width(line, map->width);
-		if (map->width == 0)
-			res = 2;
-		if (validate_characters(line) == 0)
-			res = 3;
-		map->height++;*/
-		printf("%s", line);
-		free(line);
-	}
-	close(fd);
-	return (res);
-}
-
-/*void	setup_map(t_map *map)
-{
-	map->width = 0;
-	map->height = 0;
-	map->collectibles = 0;
-	map->starting_pos = 0;
-	map->exit = 0;
-	map->curr_pos_x = 0;
-	map->curr_pos_y = 0;
-	map->collected_col = 0;
-}*/
-
-int	check_open_file(char *map_file)
-{
-	int	fd;
-	fd = open(map_file, O_RDONLY);
-	if (fd < 0)
-	{
-		printf("Error\n\033[1;31mThe file could not be opened\033[0m\n");
-		return (-1);
-	}
-	return (fd);
-}
-
-int	check_file_type(char *map_file)
-{
-	int		i;
-	int		j;
-	char	*cub;
+	int	i;
 
 	i = 0;
-	j = 3;
-	cub = ".cub";
-	while (map_file[i])
+	while (line[i])
 		i++;
-	i--;
-	while (j >= 0)
-	{
-		if (map_file[i] != cub[j])
-		{
-			printf("Error\n\033[1;31mMap file type is INVALID!\033[0m\n");
-			return (-1);
-		}
-		j--;
-		i--;
-	}
-	return (check_open_file(map_file));
+	if (line [i - 1] != '\n')
+		return (i);
+	return (i - 1);
 }
 
-bool	validate_map(char *map_file)
+bool	read_map(int fd, t_map *map, char *line)
 {
-	t_map	*map;
-	int		fd;
+	int		width;
 
-	fd = check_file_type(map_file);
-	if (fd == -1)
+	if (!line)
 		return (false);
-	map = malloc(sizeof(t_map));
-	//setup_map(map);
-	read_map(fd, map);
+	while (1)
+	{
+		if (!validate_characters(line))
+		{
+			printf("Error\n\033[1;31mThe map contains invalid elements"
+				   "\033[0m\n");
+			return (false);
+		}
+		width = check_width(line);
+		if (width > map->width)
+			map->width = width;
+		map->height++;
+		free(line);
+		line = get_next_line(fd);
+		if (line == NULL)
+			break;
+	}
+	printf("Map width: %i\n", map->width);
+	printf("Map height: %i\n", map->height);
+	return (true);
+}
+
+bool	validate_map(int fd, t_map *map, char *line)
+{
+	//char	**map_array;
+
+	if (read_map(fd, map, line) == false)
+		return (false);
+	//map_array = save_map(map_file, map);
+	//map->map_array = map_array;
 	return (true);
 }

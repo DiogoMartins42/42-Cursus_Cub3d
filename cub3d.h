@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:59:11 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/03 19:39:42 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/06 17:18:16 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ typedef struct s_data
 
 typedef struct s_map
 {
+	int			width;
+	int			height;
 	int			starting_pos;
 	char 		c_starting_pos;
 	char		**map_array;
@@ -51,6 +53,13 @@ typedef struct s_map
 	char 		*ceiling_color;
 }				t_map;
 
-bool	validate_map(char *file);
+// Validate file & map:
+bool	validate_file(char *map_file, t_map *map);
+int		check_file_type(char *map_file);
+int		check_open_file(char *map_file);
+bool	validate_map(int fd, t_map *map, char *line);
+void	setup_map(t_map *map);
+
+void	cleanup_map(t_map *map);
 
 #endif
