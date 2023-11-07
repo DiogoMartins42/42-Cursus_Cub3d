@@ -57,7 +57,7 @@ bool	add_elements(t_map *map, char *line)
 	return (true);
 }
 
-bool	read_file(int fd, t_map *map)
+bool	read_file(int fd, t_map *map, char *map_file)
 {
 	char	*line;
 	bool	map_valid;
@@ -73,7 +73,7 @@ bool	read_file(int fd, t_map *map)
 			if (check_map_start(line))
 			{
 				printf("MAP STARTS!\n");
-				return (validate_map(fd, map, line));
+				return (validate_map(fd, map, line, map_file));
 				//map_valid = validate_map(fd, map, line);
 			//	break ;
 			}
@@ -101,5 +101,5 @@ bool	validate_file(char *map_file, t_map *map)
 	fd = check_file_type(map_file);
 	if (fd == -1)
 		return (false);
-	return (read_file(fd, map));
+	return (read_file(fd, map, map_file));
 }

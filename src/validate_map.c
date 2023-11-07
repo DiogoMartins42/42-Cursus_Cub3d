@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-/*char	**save_map(char *map_file, t_map *map)
+char	**save_map(char *map_file, t_map *map)
 {
 	int		fd;
 	char	**map_array;
@@ -29,12 +29,12 @@
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		map_array[i] = line;
+		map_array[i] = line;// O Tiago diz que e preciso fazer trim aqui
 		i++;
 	}
 	close(fd);
 	return (map_array);
-}*/
+}
 
 bool	validate_characters(char *line)
 {
@@ -93,13 +93,14 @@ bool	read_map(int fd, t_map *map, char *line)
 	return (true);
 }
 
-bool	validate_map(int fd, t_map *map, char *line)
+bool	validate_map(int fd, t_map *map, char *line, char *map_file)
 {
-	//char	**map_array;
+	char	**map_array;
 
 	if (read_map(fd, map, line) == false)
 		return (false);
-	//map_array = save_map(map_file, map);
-	//map->map_array = map_array;
+	map_array = save_map(map_file, map);
+	map->map_array = map_array;
+	printf("%s\n", map->map_array[1]);
 	return (true);
 }

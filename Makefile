@@ -6,29 +6,31 @@
 #    By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 17:08:21 by dreis-ma          #+#    #+#              #
-#    Updated: 2023/11/06 16:27:09 by dreis-ma         ###   ########.fr        #
+#    Updated: 2023/11/07 14:29:15 by dmanuel-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -g
-DEPS = libft/libft.a
+MLXFLAGS = -L ./minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11
+DEPS = libft/libft.a minilibx-linux/libmlx.a
 
 SRC = src/main.c src/validate_file.c src/validate_file_utils.c \
-src/validate_map.c src/map_cleanup.c
+src/validate_map.c src/map_cleanup.c src/init.c
 
 OBJ = $(SRC:.c=.o)
 
 NAME = cub3D
 
 LIBFT = libft/libft.a
+MLX = minilibx-linux/libmlx.a
 
 all: deps $(NAME)
 
 deps:
 	$(MAKE) -C ./libft
 $(NAME): $(OBJ) $(DEPS)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C ./libft
