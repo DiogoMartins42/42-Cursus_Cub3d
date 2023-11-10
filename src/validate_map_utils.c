@@ -1,44 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_cleanup.c                                      :+:      :+:    :+:   */
+/*   validate_map_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/06 16:25:00 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/10 20:42:44 by dreis-ma         ###   ########.fr       */
+/*   Created: 2023/11/10 20:49:59 by dreis-ma          #+#    #+#             */
+/*   Updated: 2023/11/10 20:49:59 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	cleanup_map_array(t_map *map)
+int	check_width(char *line)
 {
 	int	i;
 
 	i = 0;
-	while (i < map->height)
-	{
-		free (map->map_array[i]);
+	while (line[i])
 		i++;
-	}
-	free(map->map_array);
-}
-
-void	cleanup_map(t_map *map)
-{
-	if (map->NO)
-		free(map->NO);
-	if (map->SO)
-		free(map->SO);
-	if (map->WE)
-		free(map->WE);
-	if (map->EA)
-		free(map->EA);
-	if (map->ceiling_color)
-		free(map->ceiling_color);
-	if (map->floor_color)
-		free(map->floor_color);
-	cleanup_map_array(map);
-	free(map);
+	if (line [i - 1] != '\n')
+		return (i);
+	return (i - 1);
 }

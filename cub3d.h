@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:59:11 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/06 17:18:16 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:46:03 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_point
 typedef struct s_player
 {
 	t_point	init_pos;
-	char		init_dir;
+	char	init_dir;
 }	t_player;
 
 typedef struct s_img
@@ -52,6 +52,23 @@ typedef struct s_ray
 	double		pos_x;
 	double 		pos_y;
 }	t_ray;
+
+typedef struct s_map
+{
+	int			width;
+	int			height;
+	int 		map_start;
+	char		**map_array;
+	char		*NO;
+	char		*SO;
+	char		*WE;
+	char		*EA;
+	int 		*floor_color;
+	int 		*ceiling_color;
+	int 		p_init_x;
+	int 		p_init_y;
+	char		p_init_dir;
+}				t_map;
 
 typedef struct s_data
 {
@@ -72,23 +89,9 @@ typedef struct s_data
 	t_img		**tex_img;
 	//t_img		*mini;
 	//t_img		*prev_mini;
-}	t_data;
+	t_map		*map;
 
-typedef struct s_map
-{
-	int			width;
-	int			height;
-	int			starting_pos;
-	char 		c_starting_pos;
-	char		**map_array;
-	char		**map_array_val;
-	char		*NO;
-	char		*SO;
-	char		*WE;
-	char		*EA;
-	char 		*floor_color;
-	char 		*ceiling_color;
-}				t_map;
+}	t_data;
 
 // Validate file & map:
 bool	validate_file(char *map_file, t_map *map);
@@ -96,6 +99,10 @@ int		check_file_type(char *map_file);
 int		check_open_file(char *map_file);
 bool	validate_map(int fd, t_map *map, char *line, char *map_file);
 void	setup_map(t_map *map);
+int		*save_rgb(char *str);
+bool	check_invalid_line(char *line);
+
+int		check_width(char *line);
 
 void	cleanup_map(t_map *map);
 void	init_game(t_data *data);

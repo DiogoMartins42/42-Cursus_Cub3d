@@ -6,7 +6,7 @@
 #    By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 17:08:21 by dreis-ma          #+#    #+#              #
-#    Updated: 2023/11/07 14:29:15 by dmanuel-         ###   ########.fr        #
+#    Updated: 2023/11/10 16:02:55 by dreis-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,16 +29,20 @@ all: deps $(NAME)
 
 deps:
 	$(MAKE) -C ./libft
+	$(MAKE) -C ./minilibx-linux
 $(NAME): $(OBJ) $(DEPS)
 	$(CC) $(CFLAGS) $(OBJ) $(MLXFLAGS) $(LIBFT) -o $(NAME)
 
 clean:
 	$(MAKE) clean -C ./libft
+	$(MAKE) clean -C ./minilibx-linux
 	@rm -rf $(OBJ)
 
 fclean: clean
 	$(MAKE) $@ -C ./libft
+	$(MAKE) $@ -C ./minilibx-linux
 	@rm -rf $(NAME)
 
 re: fclean all
 	$(MAKE) re -C ./libft
+	$(MAKE) re -C ./minilibx-linux

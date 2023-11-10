@@ -15,6 +15,6 @@
 void	init_game(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
-	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win.x, data->win.y, "Cub3D");
-	
+	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win.x,
+			data->win.y, "Cub3D");
 }

@@ -6,18 +6,56 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:18:27 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/06 16:35:39 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/10 20:31:50 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
+bool	check_invalid_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != ' ' && line[i] != '\n')
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+int	*save_rgb(char *str)
+{
+	int		*rgb;
+	char	**s;
+	int		i;
+
+	rgb = malloc(3 * sizeof(int));
+	s = ft_split(str, ',');
+	i = 0;
+	while (i < 3)
+	{
+		rgb[i] = ft_atoi(s[i]);
+		i++;
+	}
+	free(str);
+	i = 0;
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
+	return (rgb);
+}
+
 void	setup_map(t_map *map)
 {
 	map->width = 0;
 	map->height = 0;
-	map->starting_pos = 0;
-	map->c_starting_pos = 0;
+	map->map_start = 0;
 	map->NO = 0;
 	map->SO = 0;
 	map->WE = 0;
@@ -30,6 +68,7 @@ void	setup_map(t_map *map)
 int	check_open_file(char *map_file)
 {
 	int	fd;
+
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 	{
