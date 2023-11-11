@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:59:11 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/10 20:46:03 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/11 14:24:20 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_ray
 
 typedef struct s_map
 {
+	char		*map_file;
 	int			width;
 	int			height;
 	int 		map_start;
@@ -97,10 +98,11 @@ typedef struct s_data
 bool	validate_file(char *map_file, t_map *map);
 int		check_file_type(char *map_file);
 int		check_open_file(char *map_file);
-bool	validate_map(int fd, t_map *map, char *line, char *map_file);
+bool	validate_map(int fd, t_map *map);
 void	setup_map(t_map *map);
 int		*save_rgb(char *str);
 bool	check_invalid_line(char *line);
+bool	read_map(int fd, t_map *map, char *line);
 
 int		check_width(char *line);
 

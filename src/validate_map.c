@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:25 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/10 20:49:36 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:57:11 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,17 +31,13 @@ void	check_player_pos(char *line, t_map *map, int j)
 	}
 }
 
-char	**save_map(char *map_file, t_map *map)
+char	**save_map(t_map *map, int fd, int i)
 {
-	int		fd;
 	char	**map_array;
 	char	*line;
-	int		i;
 	int		j;
 
-	i = 0;
 	j = 0;
-	fd = open(map_file, O_RDONLY);
 	map_array = malloc(map->height * sizeof(char *));
 	if (!map_array)
 		return (0);
@@ -60,7 +56,6 @@ char	**save_map(char *map_file, t_map *map)
 			free(line);
 		i++;
 	}
-	close(fd);
 	return (map_array);
 }
 
@@ -84,16 +79,18 @@ bool	validate_characters(char *line)
 bool	read_map(int fd, t_map *map, char *line)
 {
 	int		width;
+	bool	result;
 
+	result = true;
 	if (!line)
 		return (false);
 	while (1)
 	{
-		if (!validate_characters(line))
+		if (result && !validate_characters(line))
 		{
 			printf("Error\n\033[1;31mThe map contains invalid elements"
 				"\033[0m\n");
-			return (false);
+			result = false;
 		}
 		width = check_width(line);
 		if (width > map->width)
@@ -104,16 +101,24 @@ bool	read_map(int fd, t_map *map, char *line)
 		if (line == NULL)
 			break ;
 	}
-	return (true);
+	return (result);
 }
 
-bool	validate_map(int fd, t_map *map, char *line, char *map_file)
+bool	validate_map(int fd, t_map *map)
 {
-	char	**map_array;
-
-	if (read_map(fd, map, line) == false)
+	fd = open(map->map_file, O_RDONLY);
+	map->map_array = save_map(map, fd, 0);
+	close(fd);
+	if (map->p_init_dir == 0)
+	{
+		printf("Error\n\033[1;31mThe map doesn't contain a player's start "
+			   "position\033[0m\n");
 		return (false);
-	map_array = save_map(map_file, map);
-	map->map_array = map_array;
+	}
+	if (!map->floor_color || !map->ceiling_color)
+	{
+		printf("Error\n\033[1;31mWrong Floor or Ceiling color\033[0m\n");
+		return (false);
+	}
 	return (true);
 }

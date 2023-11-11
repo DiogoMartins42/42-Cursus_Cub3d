@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:21:48 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/10 20:46:25 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/11 16:52:58 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,49 +62,48 @@ bool	add_elements(t_map *map, char *line)
 	return (true);
 }
 
-bool	read_file(int fd, t_map *map, char *map_file)
+bool	read_file(int fd, t_map *map)
 {
 	char	*line;
-	bool	map_valid;
-	int		line_index;
+	bool	loop;
 
-	map_valid = false;
-	line_index = 0;
+	loop = true;
 	while (1)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
 			break ;
-		if (!add_elements(map, line))
+		if (loop && !add_elements(map, line))
 		{
 			if (check_map_start(line))
-			{
-				map->map_start = line_index;
-				return (validate_map(fd, map, line, map_file));
-			}
+				return (read_map(fd, map, line));
 			if (check_invalid_line(line))
 			{
-				// leak here
+				loop = false;
 				printf("Error\n\033[1;31mThe file contains invalid elements"
-					"\033[0m\n");
-				free(line);
-				close(fd);
-				return (false);
+					   "\033[0m\n");
 			}
 		}
-		line_index++;
+		map->map_start++;
 		free(line);
 	}
-	close(fd);
-	return (map_valid);
+	if (loop)
+		printf("Error\n\033[1;31mThe file doesn't contain a map \033[0m\n");
+	return (false);
 }
 
 bool	validate_file(char *map_file, t_map *map)
 {
 	int		fd;
+	bool	result;
 
 	fd = check_file_type(map_file);
 	if (fd == -1)
 		return (false);
-	return (read_file(fd, map, map_file));
+	map->map_file = map_file;
+	result = read_file(fd, map);
+	close(fd);
+	if (result)
+		result = validate_map(fd, map);
+	return (result);
 }

@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:18:27 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/10 20:31:50 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/11 17:01:30 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,13 @@ int	*save_rgb(char *str)
 	i = 0;
 	while (i < 3)
 	{
+		if (!s[i])
+			return (NULL);
+
+		//if (ft_isdigit(s[i]))
+		//	return (NULL);
 		rgb[i] = ft_atoi(s[i]);
+		printf("rgb: %i\n", rgb[i]);
 		i++;
 	}
 	free(str);
@@ -63,6 +69,9 @@ void	setup_map(t_map *map)
 	map->floor_color = 0;
 	map->ceiling_color = 0;
 	map->map_array = NULL;
+	map->p_init_dir = 0;
+	map->p_init_y = 0;
+	map->p_init_x = 0;
 }
 
 int	check_open_file(char *map_file)
