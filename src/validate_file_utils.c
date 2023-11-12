@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:18:27 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/11 17:01:30 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/12 15:06:45 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,54 +24,6 @@ bool	check_invalid_line(char *line)
 		i++;
 	}
 	return (false);
-}
-
-int	*save_rgb(char *str)
-{
-	int		*rgb;
-	char	**s;
-	int		i;
-
-	rgb = malloc(3 * sizeof(int));
-	s = ft_split(str, ',');
-	i = 0;
-	while (i < 3)
-	{
-		if (!s[i])
-			return (NULL);
-
-		//if (ft_isdigit(s[i]))
-		//	return (NULL);
-		rgb[i] = ft_atoi(s[i]);
-		printf("rgb: %i\n", rgb[i]);
-		i++;
-	}
-	free(str);
-	i = 0;
-	while (s[i])
-	{
-		free(s[i]);
-		i++;
-	}
-	free(s);
-	return (rgb);
-}
-
-void	setup_map(t_map *map)
-{
-	map->width = 0;
-	map->height = 0;
-	map->map_start = 0;
-	map->NO = 0;
-	map->SO = 0;
-	map->WE = 0;
-	map->EA = 0;
-	map->floor_color = 0;
-	map->ceiling_color = 0;
-	map->map_array = NULL;
-	map->p_init_dir = 0;
-	map->p_init_y = 0;
-	map->p_init_x = 0;
 }
 
 int	check_open_file(char *map_file)

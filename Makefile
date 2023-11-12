@@ -6,7 +6,7 @@
 #    By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 17:08:21 by dreis-ma          #+#    #+#              #
-#    Updated: 2023/11/11 16:16:30 by dreis-ma         ###   ########.fr        #
+#    Updated: 2023/11/12 15:53:25 by dreis-ma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,11 +16,12 @@ MLXFLAGS = -L ./minilibx-linux -lm -lmlx -Ilmlx -lXext -lX11
 DEPS = libft/libft.a minilibx-linux/libmlx.a
 
 SRC = src/main.c src/validate_file.c src/validate_file_utils.c \
-src/validate_map.c src/validate_map_utils.c src/map_cleanup.c src/init.c
+src/validate_file_utils_2.c src/validate_map.c src/validate_map_utils.c \
+src/map_cleanup.c src/init.c
 
 OBJ = $(SRC:.c=.o)
 
-NAME = Cub3D
+NAME = cub3D
 
 LIBFT = libft/libft.a
 MLX = minilibx-linux/libmlx.a

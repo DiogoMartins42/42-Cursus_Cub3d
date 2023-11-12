@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:25 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/11 16:57:11 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/12 14:38:00 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,16 +109,5 @@ bool	validate_map(int fd, t_map *map)
 	fd = open(map->map_file, O_RDONLY);
 	map->map_array = save_map(map, fd, 0);
 	close(fd);
-	if (map->p_init_dir == 0)
-	{
-		printf("Error\n\033[1;31mThe map doesn't contain a player's start "
-			   "position\033[0m\n");
-		return (false);
-	}
-	if (!map->floor_color || !map->ceiling_color)
-	{
-		printf("Error\n\033[1;31mWrong Floor or Ceiling color\033[0m\n");
-		return (false);
-	}
-	return (true);
+	return (check_all_elements(map));
 }
