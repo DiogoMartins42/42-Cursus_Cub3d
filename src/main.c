@@ -70,8 +70,8 @@ int	main(int ac, char **av)
 			printf("SO texture: %s\n", data->map->SO);
 			printf("WE texture: %s\n", data->map->WE);
 			printf("EA texture: %s\n", data->map->EA);
-			//init_game(data);
-			//while(1);
+			init_game(data);
+			while(1);
 		}
 		cleanup_map(map);
 		free(data);

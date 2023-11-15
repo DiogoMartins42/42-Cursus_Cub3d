@@ -6,7 +6,7 @@
 #    By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/02 17:08:21 by dreis-ma          #+#    #+#              #
-#    Updated: 2023/11/12 15:53:25 by dreis-ma         ###   ########.fr        #
+#    Updated: 2023/11/15 14:08:22 by dmanuel-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ DEPS = libft/libft.a minilibx-linux/libmlx.a
 
 SRC = src/main.c src/validate_file.c src/validate_file_utils.c \
 src/validate_file_utils_2.c src/validate_map.c src/validate_map_utils.c \
-src/map_cleanup.c src/init.c
+src/map_cleanup.c src/init.c src/ray.c
 
 OBJ = $(SRC:.c=.o)
 
