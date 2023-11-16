@@ -60,6 +60,26 @@ void	direction(t_data *data)
 		set_dirwe(data);
 }
 
+int	movement_press(t_data *data)
+{
+	double	move_spd;
+
+	move_spd = 0.1;
+	if(data->moves.w == true)
+		movement_w_press(data, move_spd);
+	if(data->moves.s == true)
+		movement_s_press(data, move_spd);
+	if(data->moves.a == true)
+		movement_a_press(data, move_spd);
+	if(data->moves.d == true)
+		movement_d_press(data, move_spd);
+	if(data->moves.rotate_l == true)
+		rotate_left(data, move_spd);
+	if(data->moves.rotate_r == true)
+		rotate_rigth(data, move_spd);
+	return (0);
+}
+
 void	init_game(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
@@ -68,4 +88,9 @@ void	init_game(t_data *data)
 	data->ray.pos_x = data->player.init_pos.x + 0.5;
 	data->ray.pos_y = data->player.init_pos.y + 0.5;
 	direction(data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_press, data);
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_release, data);
+	mlx_hook(data->win_ptr, 17, 1L << 17, exit_game, data);
+	mlx_loop_hook(data->mlx_ptr, &ray, data);
+	mlx_loop(data->mlx_ptr);
 }

@@ -12,7 +12,7 @@
 
 #include "../cub3d.h"
 
-void	step_math(t_data *data)
+static	void	step_math(t_data *data)
 {
 	if(data->ray.ray_dirx < 0)
 	{
@@ -40,7 +40,7 @@ void	step_math(t_data *data)
 	}
 }
 
-void	calcs(t_data *data, int x)
+static void	calcs(t_data *data, int x)
 {
 	data->ray.camera_x = 2 * x / data->win.x - 1;
 	data->ray.ray_dirx = data->ray.dir_x + data->ray.plane_x \
@@ -53,9 +53,10 @@ void	calcs(t_data *data, int x)
 	data->ray.map_y = (int) data->ray.pos_y;
 	data->ray.hit = 0;
 	data->ray.side = 0;
+	data->ray.color = rgb_converter(255, 0, 0);
 }
 
-void	dda_calcs(t_data *data)
+static	void	dda_calcs(t_data *data)
 {
 	while (data->ray.hit == 0)
 	{
@@ -76,6 +77,21 @@ void	dda_calcs(t_data *data)
 	}
 }
 
+static void draw_walls(t_data *data)
+{
+	if (data->ray.side == 0)
+		data->ray.perp_wdist = data->ray.side_dist_x - data->ray.delta_dist_x;
+	else
+		data->ray.perp_wdist = data->ray.side_dist_y - data->ray.delta_dist_y;
+	data->ray.line_h = (int) (data->win.y / data->ray.perp_wdist);
+	data->ray.draw_start = -data->ray.line_h / 2 + (data->win.y / 2);
+	if (data->ray.draw_start < 0)
+		data->ray.draw_start = 0;
+	data->ray.draw_end = data->ray.line_h / 2 + (data->win.y / 2);
+	if (data->ray.draw_end >= data->win.y)
+		data->ray.draw_end = data->win.y - 1;
+}
+
 int	ray(t_data *data)
 {
 	int	x;
@@ -86,6 +102,10 @@ int	ray(t_data *data)
 		calcs(data, x);
 		step_math(data);
 		dda_calcs(data);
+		draw_walls(data);
+		color_select(data);
+		//color_draw(data);
 	}
+	movement_press(data);
 	return (0);
 }

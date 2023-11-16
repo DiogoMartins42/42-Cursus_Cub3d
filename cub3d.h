@@ -42,6 +42,16 @@ typedef struct s_player
 	char	init_dir;
 }	t_player;
 
+typedef struct s_movement
+{
+	bool	w;
+	bool	s;
+	bool	a;
+	bool	d;
+	bool	rotate_r;
+	bool	rotate_l;
+}	t_movement;
+
 typedef struct s_img
 {
 	void	*mlx_img;
@@ -69,6 +79,10 @@ typedef struct s_ray
 	int			step_y;
 	int			hit;
 	int			side;
+	int			line_h;
+	int			draw_start;
+	int			draw_end;
+	int			color;
 
 }	t_ray;
 
@@ -96,6 +110,7 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	int			id;
+	int			diff_x;
 	//double		mid_point;
 	//double		max_fov;
 	//double		min_fov;
@@ -108,6 +123,7 @@ typedef struct s_data
 	t_ray		ray;
 	t_img		*img;
 	t_img		**tex_img;
+	t_movement	moves;
 	//t_img		*mini;
 	//t_img		*prev_mini;
 	t_map		*map;
@@ -126,7 +142,24 @@ bool	check_all_elements(t_map *map);
 
 int		check_width(char *line);
 
-void	cleanup_map(t_map *map);
-void	init_game(t_data *data);
+void			cleanup_map(t_map *map);
+void			init_game(t_data *data);
+
+int				ray(t_data *data);
+
+void			color_select(t_data *data);
+int				rgb_converter(int red, int green, int blue);
+
+int				exit_game(t_data *data);
+
+int				handle_press(int key, t_data *data);
+int				handle_release(int key, t_data *data);
+void			movement_a_press(t_data *data, double move_spd);
+void			movement_d_press(t_data *data, double move_spd);
+void			movement_s_press(t_data *data, double move_spd);
+void			movement_w_press(t_data *data, double move_spd);
+int				movement_press(t_data *data);
+void			rotate_left(t_data *data, double move_spd);
+void			rotate_rigth(t_data *data, double move_spd);
 
 #endif
