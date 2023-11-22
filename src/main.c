@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:50:40 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/12 16:16:40 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:17:59 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,9 @@ int	main(int ac, char **av)
 			printf("SO texture: %s\n", data->map->SO);
 			printf("WE texture: %s\n", data->map->WE);
 			printf("EA texture: %s\n", data->map->EA);
-			init_game(data);
-			while(1);
+			//init_game(data);
+			//while(1);
+			// check if rgb is valid
 		}
 		cleanup_map(map);
 		free(data);

@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:59:11 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/12 15:51:35 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/18 17:07:54 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ int		*save_rgb(char *str);
 bool	check_invalid_line(char *line);
 bool	read_map(int fd, t_map *map, char *line);
 bool	check_all_elements(t_map *map);
+bool	validate_walls(t_map *map);
 
 int		check_width(char *line);
 

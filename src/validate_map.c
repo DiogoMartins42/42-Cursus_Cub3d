@@ -6,13 +6,13 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:15:25 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/12 14:38:00 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/22 19:16:38 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	check_player_pos(char *line, t_map *map, int j)
+bool	check_player_pos(char *line, t_map *map, int j)
 {
 	int	i;
 
@@ -22,6 +22,12 @@ void	check_player_pos(char *line, t_map *map, int j)
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')
 		{
+			if (map->p_init_dir != 0)
+			{
+				printf("Error\n\033[1;31mThe map contains a duplicated player"
+					   " position\033[0m\n");
+				return (false);
+			}
 			map->p_init_y = j;
 			map->p_init_x = i;
 			map->p_init_dir = line[i];
@@ -29,6 +35,7 @@ void	check_player_pos(char *line, t_map *map, int j)
 		}
 		i++;
 	}
+	return (true);
 }
 
 char	**save_map(t_map *map, int fd, int i)
@@ -48,7 +55,8 @@ char	**save_map(t_map *map, int fd, int i)
 			break ;
 		if (i >= map->map_start)
 		{
-			check_player_pos(line, map, j);
+			if (!check_player_pos(line, map, j))
+				return (NULL);
 			map_array[j] = line;
 			j++;
 		}
@@ -109,5 +117,10 @@ bool	validate_map(int fd, t_map *map)
 	fd = open(map->map_file, O_RDONLY);
 	map->map_array = save_map(map, fd, 0);
 	close(fd);
-	return (check_all_elements(map));
+	if (!map->map_array)
+		return (false);
+	if (!check_all_elements(map))
+		return (false);
+	return (validate_walls(map));
+	return (true);
 }
