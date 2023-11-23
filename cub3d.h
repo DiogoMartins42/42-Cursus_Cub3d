@@ -36,6 +36,15 @@ typedef struct s_point
 	int			y;
 }	t_point;
 
+typedef struct s_img
+{
+	void		*mlx_img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}	t_img;
+
 typedef struct s_player
 {
 	t_point	init_pos;
@@ -51,11 +60,6 @@ typedef struct s_movement
 	bool	rotate_r;
 	bool	rotate_l;
 }	t_movement;
-
-typedef struct s_img
-{
-	void	*mlx_img;
-}	t_img;
 
 typedef struct s_ray
 {

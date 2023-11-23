@@ -18,7 +18,8 @@ DEPS = libft/libft.a minilibx-linux/libmlx.a
 SRC = src/main.c src/validate_file.c src/validate_file_utils.c \
 src/validate_file_utils_2.c src/validate_map.c src/validate_map_utils.c \
 src/map_cleanup.c src/init.c src/ray.c src/color_draw.c src/color_utils.c \
-src/key_handle.c src/exit.c src/movement.c src/rotate.c src/validate_walls.c
+src/key_handle.c src/exit.c src/movement.c src/rotate.c src/validate_walls.c \
+src/image_setup.c
 
 OBJ = $(SRC:.c=.o)
 

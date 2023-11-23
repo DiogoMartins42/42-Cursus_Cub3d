@@ -97,6 +97,7 @@ int	ray(t_data *data)
 	int	x;
 
 	x = 0;
+	img_setup(data, data->img);
 	while (x++ < data->win.x)
 	{
 		calcs(data, x);
@@ -106,6 +107,8 @@ int	ray(t_data *data)
 		color_select(data);
 		//color_draw(data);
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
+		data->img->mlx_img, 0, 0);
 	movement_press(data);
 	return (0);
 }
