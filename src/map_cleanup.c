@@ -6,11 +6,26 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:25:00 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/11 16:10:55 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:17:17 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+void	cleanup_map_array_2(char **map_array, int j)
+{
+	int	i;
+
+	i = 0;
+	if (!map_array)
+		return ;
+	while (i < j)
+	{
+		free (map_array[i]);
+		i++;
+	}
+	free(map_array);
+}
 
 void	cleanup_map_array(t_map *map)
 {

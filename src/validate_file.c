@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/06 16:21:48 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/12 15:50:39 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/24 20:10:06 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,12 +97,8 @@ bool	add_elements(t_map *map, char *line)
 	return (true);
 }
 
-bool	read_file(int fd, t_map *map)
+bool	read_file(int fd, t_map *map, bool loop, char *line)
 {
-	char	*line;
-	bool	loop;
-
-	loop = true;
 	while (1)
 	{
 		line = get_next_line(fd);
@@ -113,16 +109,11 @@ bool	read_file(int fd, t_map *map)
 			if (check_map_start(line))
 				return (read_map(fd, map, line));
 			if (check_invalid_line(line))
-			{
 				loop = false;
-				printf("Error\n\033[1;31mThe file contains invalid elements"
-					"\033[0m\n");
-			}
 		}
 		else if (loop && (map->duplicated_elements == true))
 		{
-			printf("Error\n\033[1;31mThe file contains duplicated elements"
-				"\033[0m\n");
+			printf("Error\n\033[1;31mFile has duplicated elements\033[0m\n");
 			loop = false;
 		}
 		map->map_start++;
@@ -137,12 +128,15 @@ bool	validate_file(char *map_file, t_map *map)
 {
 	int		fd;
 	bool	result;
+	char	*line;
 
+	result = true;
+	line = NULL;
 	fd = check_file_type(map_file);
 	if (fd == -1)
 		return (false);
 	map->map_file = map_file;
-	result = read_file(fd, map);
+	result = read_file(fd, map, result, line);
 	close(fd);
 	if (result)
 		result = validate_map(fd, map);

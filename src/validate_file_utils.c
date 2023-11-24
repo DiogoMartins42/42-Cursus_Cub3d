@@ -20,7 +20,10 @@ bool	check_invalid_line(char *line)
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '\n')
+		{
+			printf("Error\n\033[1;31mFile has invalid elements\033[0m\n");
 			return (true);
+		}
 		i++;
 	}
 	return (false);

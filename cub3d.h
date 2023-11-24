@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 13:59:11 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/18 17:07:54 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:16:48 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,10 +144,12 @@ bool	check_invalid_line(char *line);
 bool	read_map(int fd, t_map *map, char *line);
 bool	check_all_elements(t_map *map);
 bool	validate_walls(t_map *map);
+char	*fill_line(char *line, int width);
 
 int		check_width(char *line);
 
 void			cleanup_map(t_map *map);
+void			cleanup_map_array_2(char **map_array, int j);
 void			init_game(t_data *data);
 
 int				ray(t_data *data);
@@ -166,5 +168,7 @@ void			movement_w_press(t_data *data, double move_spd);
 int				movement_press(t_data *data);
 void			rotate_left(t_data *data, double move_spd);
 void			rotate_rigth(t_data *data, double move_spd);
+
+void	init_image(t_data *data, t_img *image);
 
 #endif

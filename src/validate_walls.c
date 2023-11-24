@@ -6,7 +6,7 @@
 /*   By: dreis-ma <dreis-ma@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 16:28:39 by dreis-ma          #+#    #+#             */
-/*   Updated: 2023/11/22 19:09:07 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:51:03 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,15 @@ bool	check_char(char c)
 	return (true);
 }
 
-bool check_boundaries(int y, int x, t_map *map_s)
+bool	check_boundaries(int y, int x, t_map *map_s)
 {
 	if (y <= 0 || y >= (map_s->height - 1) || x <= 0 || x >= (map_s->width - 1))
 		return (true);
 	return (false);
 }
 
-bool check_surroundings(char **map, int y, int x, t_map *map_s) {
+bool	check_surroundings(char **map, int y, int x, t_map *map_s)
+{
 	if (check_boundaries(y, x, map_s))
 		return (false);
 	return (check_char(map[y - 1][x - 1]) && check_char(map[y - 1][x]) && \
@@ -40,7 +41,7 @@ bool check_surroundings(char **map, int y, int x, t_map *map_s) {
 bool	check_walls(t_map *map)
 {
 	int	x;
-	int y;
+	int	y;
 
 	y = 0;
 	while (y < map->height)
@@ -69,6 +70,5 @@ bool	validate_walls(t_map *map)
 		printf("Error\n\033[1;31mThe map is not surrounded by walls\033[0m\n");
 		return (false);
 	}
-
 	return (true);
 }

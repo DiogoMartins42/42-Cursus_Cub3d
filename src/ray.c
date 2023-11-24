@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 14:07:00 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/15 14:07:02 by dmanuel-         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:56:40 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static	void	step_math(t_data *data)
 {
-	if(data->ray.ray_dirx < 0)
+	if (data->ray.ray_dirx < 0)
 	{
 		data->ray.step_x = -1;
 		data->ray.side_dist_x = (data->ray.pos_x - data->ray.map_x) \
@@ -26,7 +26,7 @@ static	void	step_math(t_data *data)
 		data->ray.side_dist_x = (data->ray.map_x + 1.0 - data->ray.pos_x) \
 			* data->ray.delta_dist_x;
 	}
-	if(data->ray.ray_diry < 0)
+	if (data->ray.ray_diry < 0)
 	{
 		data->ray.step_y = -1;
 		data->ray.side_dist_y = (data->ray.pos_y - data->ray.map_y) \
@@ -60,20 +60,20 @@ static	void	dda_calcs(t_data *data)
 {
 	while (data->ray.hit == 0)
 	{
-			if (data->ray.side_dist_x < data->ray.side_dist_y)
-			{
-				data->ray.side_dist_x += data->ray.delta_dist_x;
-				data->ray.map_x += data->ray.step_x;
-				data->ray.side = 0;
-			}
-			else
-			{
-				data->ray.side_dist_y += data->ray.delta_dist_y;
-				data->ray.map_y += data->ray.step_y;
-				data->ray.side = 1;
-			}
-			if (data->map->map_array[data->ray.map_y][data->ray.map_x] != '0')
-				data->ray.hit = 1;
+		if (data->ray.side_dist_x < data->ray.side_dist_y)
+		{
+			data->ray.side_dist_x += data->ray.delta_dist_x;
+			data->ray.map_x += data->ray.step_x;
+			data->ray.side = 0;
+		}
+		else
+		{
+			data->ray.side_dist_y += data->ray.delta_dist_y;
+			data->ray.map_y += data->ray.step_y;
+			data->ray.side = 1;
+		}
+		if (data->map->map_array[data->ray.map_y][data->ray.map_x] != '0')
+			data->ray.hit = 1;
 	}
 }
 
@@ -97,7 +97,7 @@ int	ray(t_data *data)
 	int	x;
 
 	x = 0;
-	img_setup(data, data->img);
+	init_image(data, data->img);
 	while (x++ < data->win.x)
 	{
 		calcs(data, x);

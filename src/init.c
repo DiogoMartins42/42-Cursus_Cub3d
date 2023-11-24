@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:02:01 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/10/31 14:02:03 by dmanuel-         ###   ########.fr       */
+/*   Updated: 2023/11/24 19:49:39 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 void	set_dirns(t_data *data)
 {
-	if('N'  == data->player.init_dir)
+	if ('N' == data->player.init_dir)
 	{
 		data->ray.dir_x = 0;
 		data->ray.dir_y = -1;
 		data->ray.plane_x = 1;
 		data->ray.plane_y = 0;
 	}
-	else if('S'  == data->player.init_dir)
+	else if ('S' == data->player.init_dir)
 	{
 		data->ray.dir_x = 0;
 		data->ray.dir_y = 1;
@@ -32,14 +32,14 @@ void	set_dirns(t_data *data)
 
 void	set_dirwe(t_data *data)
 {
-	if('E'  == data->player.init_dir)
+	if ('E' == data->player.init_dir)
 	{
 		data->ray.dir_x = 1;
 		data->ray.dir_y = 0;
 		data->ray.plane_x = 0;
 		data->ray.plane_y = 1;
 	}
-	else if('W'  == data->player.init_dir)
+	else if ('W' == data->player.init_dir)
 	{
 		data->ray.dir_x = -1;
 		data->ray.dir_y = 0;
@@ -50,13 +50,13 @@ void	set_dirwe(t_data *data)
 
 void	direction(t_data *data)
 {
-	if('N'  == data->player.init_dir)
+	if ('N' == data->player.init_dir)
 		set_dirns(data);
-	if('S'  == data->player.init_dir)
+	if ('S' == data->player.init_dir)
 		set_dirns(data);
-	if('E'  == data->player.init_dir)
+	if ('E' == data->player.init_dir)
 		set_dirwe(data);
-	if('W'  == data->player.init_dir)
+	if ('W' == data->player.init_dir)
 		set_dirwe(data);
 }
 
@@ -65,17 +65,17 @@ int	movement_press(t_data *data)
 	double	move_spd;
 
 	move_spd = 0.1;
-	if(data->moves.w == true)
+	if (data->moves.w == true)
 		movement_w_press(data, move_spd);
-	if(data->moves.s == true)
+	if (data->moves.s == true)
 		movement_s_press(data, move_spd);
-	if(data->moves.a == true)
+	if (data->moves.a == true)
 		movement_a_press(data, move_spd);
-	if(data->moves.d == true)
+	if (data->moves.d == true)
 		movement_d_press(data, move_spd);
-	if(data->moves.rotate_l == true)
+	if (data->moves.rotate_l == true)
 		rotate_left(data, move_spd);
-	if(data->moves.rotate_r == true)
+	if (data->moves.rotate_r == true)
 		rotate_rigth(data, move_spd);
 	return (0);
 }

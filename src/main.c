@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 12:50:40 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/22 19:17:59 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2023/11/24 18:33:47 by dreis-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	main(int ac, char **av)
 			printf("EA texture: %s\n", data->map->EA);
 			//init_game(data);
 			//while(1);
-			// check if rgb is valid
 		}
 		cleanup_map(map);
 		free(data);
