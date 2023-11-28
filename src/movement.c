@@ -19,6 +19,7 @@ void	movement_a_press(t_data *data, double move_spd)
 
 	x = (int)(data->ray.pos_x - data->ray.plane_x * move_spd);
 	y = (int) data->ray.pos_y;
+	printf("a");
 	if (data->map->map_array[y][x] == '0')
 		data->ray.pos_x -= data->ray.plane_x * move_spd;
 	x = (int) data->ray.pos_x;

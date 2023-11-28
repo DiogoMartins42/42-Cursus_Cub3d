@@ -97,7 +97,11 @@ int	ray(t_data *data)
 	int	x;
 
 	x = 0;
-	//printf("here");
+	if (data->img->mlx_img)
+	{
+		mlx_destroy_image(data->mlx_ptr, data->img->mlx_img);
+		data->img->mlx_img = 0;
+	}		
 	init_image(data, data->img);
 	while (x++ < data->win.x)
 	{
