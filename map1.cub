@@ -1,7 +1,7 @@
-NO ./pictures/wood.XPM
-SO ./pictures/wood.XPM
-WE ./pictures/wood.XPM
-EA ./pictures/wood.XPM
+NO ./pictures/wood.xpm
+SO ./pictures/wood.xpm
+WE ./pictures/wood.xpm
+EA ./pictures/wood.xpm
 
 F 20,42,64
 C 50,109,168

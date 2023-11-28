@@ -88,8 +88,9 @@ void	init_game(t_data *data)
 	data->ray.pos_x = data->player.init_pos.x + 0.5;
 	data->ray.pos_y = data->player.init_pos.y + 0.5;
 	direction(data);
+	image_load(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_press, data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_release, data);
+	mlx_hook(data->win_ptr, KeyRelease, KeyPressMask, &handle_release, data);
 	mlx_hook(data->win_ptr, 17, 1L << 17, exit_game, data);
 	mlx_loop_hook(data->mlx_ptr, &ray, data);
 	mlx_loop(data->mlx_ptr);
