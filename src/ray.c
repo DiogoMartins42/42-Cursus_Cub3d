@@ -97,6 +97,7 @@ int	ray(t_data *data)
 	int	x;
 
 	x = 0;
+	//printf("here");
 	init_image(data, data->img);
 	while (x++ < data->win.x)
 	{
@@ -105,7 +106,7 @@ int	ray(t_data *data)
 		dda_calcs(data);
 		draw_walls(data);
 		color_select(data);
-		//color_draw(data);
+		texturing(data, x, data->id);
 	}
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, \
 		data->img->mlx_img, 0, 0);

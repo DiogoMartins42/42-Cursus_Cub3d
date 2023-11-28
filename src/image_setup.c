@@ -77,6 +77,7 @@ void	init_image(t_data *data, t_img *image)
 	image->addr = mlx_get_data_addr(image->mlx_img, \
 		&image->bits_per_pixel, &image->line_length, \
 			&image->endian);
+
 	draw_floor(data);
 	draw_ceiling(data);
 }

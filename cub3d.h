@@ -156,6 +156,9 @@ int				ray(t_data *data);
 
 void			color_select(t_data *data);
 int				rgb_converter(int red, int green, int blue);
+unsigned int	gix(t_img *img, int x, int y);
+void			pix(t_img *img, int x, int y, int color);
+void			texturing(t_data *data, int x, int id);
 
 int				exit_game(t_data *data);
 

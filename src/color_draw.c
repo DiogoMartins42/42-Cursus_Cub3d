@@ -12,8 +12,6 @@
 
 #include "../cub3d.h"
 
-//void	color_draw();
-
 void	color_select(t_data *data)
 {
 	if (data->ray.ray_dirx < 0 && data->ray.side == 0)
