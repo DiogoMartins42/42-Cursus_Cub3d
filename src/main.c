@@ -12,6 +12,22 @@
 
 #include "../cub3d.h"
 
+void	init_images(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	data->img = malloc((sizeof(t_img)));
+	data->img->mlx_img = 0;
+	data->tex_img = ft_calloc(4 + 1, sizeof(t_img *));
+	while (i < 4)
+	{
+		data->tex_img[i] = malloc(sizeof(t_img));
+		data->tex_img[i]->mlx_img = 0;
+		i++;
+	}
+}
+
 void	init_map(t_map *map)
 {
 	map->width = 0;
@@ -39,8 +55,9 @@ t_data	*init_data(void)
 		return (0);
 	data->mlx_ptr = 0;
 	data->win_ptr = 0;
-	data->win.x = 1280;
-	data->win.y = 1024;
+	init_images(data);
+	data->win.x = 1024;
+	data->win.y = 720;
 	data->map = NULL;
 	return (data);
 }
@@ -70,8 +87,7 @@ int	main(int ac, char **av)
 			printf("SO texture: %s\n", data->map->SO);
 			printf("WE texture: %s\n", data->map->WE);
 			printf("EA texture: %s\n", data->map->EA);
-			//init_game(data);
-			//while(1);
+			init_game(data);
 		}
 		cleanup_map(map);
 		free(data);

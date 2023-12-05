@@ -45,7 +45,7 @@ bool	is_texture_valid(char *path)
 
 	if (!path)
 		return (false);
-	if (!ft_strnstr(path, ".XPM", ft_strlen(path)))
+	if (!ft_strnstr(path, ".xpm", ft_strlen(path)))
 		return (false);
 	fd = open(path, O_RDONLY);
 	if (fd == -1)
