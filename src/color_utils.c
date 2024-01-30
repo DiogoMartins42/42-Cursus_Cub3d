@@ -6,13 +6,13 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 11:51:55 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/16 11:53:18 by dmanuel-         ###   ########.fr       */
+/*   Updated: 2024/01/30 11:43:00 by dmanuel-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-static void texturing2( t_data *data, int x, int id, t_point *texture)
+static void	texturing2( t_data *data, int x, int id, t_point *texture)
 {
 	double	texture_pos;
 	double	step;
@@ -20,7 +20,7 @@ static void texturing2( t_data *data, int x, int id, t_point *texture)
 
 	step = 1.0 * 64 / data->ray.line_h;
 	texture_pos = (data->ray.draw_start - (data->win.y / 2) + \
-		data->ray.line_h /2) * step;
+		data->ray.line_h / 2) * step;
 	y = data->ray.draw_start;
 	while (y < data->ray.draw_end && y < data->win.y)
 	{
@@ -37,22 +37,22 @@ static void texturing2( t_data *data, int x, int id, t_point *texture)
 
 void	texturing(t_data *data, int x, int id)
 {
-	double 	wallx;
+	double	wall_x;
 	t_point	texture;
 
 	if (data->ray.side == 0)
 	{
-		wallx = data->ray.pos_y + data->ray.perp_wdist * \
+		wall_x = data->ray.pos_y + data->ray.perp_wdist * \
 			data->ray.ray_diry;
-		wallx -= data->ray.map_y;
+		wall_x -= data->ray.map_y;
 	}
 	else
 	{
-		wallx = data->ray.pos_x + data->ray.perp_wdist * \
+		wall_x = data->ray.pos_x + data->ray.perp_wdist * \
 			data->ray.ray_dirx;
-		wallx -= data->ray.map_x;
+		wall_x -= data->ray.map_x;
 	}
-	texture.x = (int)(wallx * (double)64);
+	texture.x = (int)(wall_x * (double)64);
 	texture.x = 64 - texture.x - 1;
 	texturing2(data, x, id, &texture);
 }

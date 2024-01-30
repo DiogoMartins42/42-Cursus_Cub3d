@@ -64,7 +64,7 @@ typedef struct s_movement
 typedef struct s_ray
 {
 	double		pos_x;
-	double 		pos_y;
+	double		pos_y;
 	double		dir_x;
 	double		dir_y;
 	double		plane_x;
