@@ -85,6 +85,9 @@ void	init_game(t_data *data)
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, data->win.x,
 			data->win.y, "Cub3D");
+	data->player.init_pos.x = data->map->p_init_x;
+	data->player.init_pos.y = data->map->p_init_y;
+	data->player.init_dir = data->map->p_init_dir;
 	data->ray.pos_x = data->player.init_pos.x + 0.5;
 	data->ray.pos_y = data->player.init_pos.y + 0.5;
 	direction(data);

@@ -96,7 +96,7 @@ typedef struct s_map
 	bool		duplicated_elements;
 	int			width;
 	int			height;
-	int 		map_start;
+	int			map_start;
 	char		**map_array;
 	char		*NO;
 	char		*SO;
