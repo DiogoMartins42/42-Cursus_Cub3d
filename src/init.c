@@ -6,7 +6,7 @@
 /*   By: dmanuel- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/31 14:02:01 by dmanuel-          #+#    #+#             */
-/*   Updated: 2023/11/24 19:49:39 by dreis-ma         ###   ########.fr       */
+/*   Updated: 2024/02/01 13:33:58 by dmanuel-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,10 @@ void	direction(t_data *data)
 int	movement_press(t_data *data)
 {
 	double	move_spd;
+	double	rotspeed;
 
-	move_spd = 0.1;
+	move_spd = 0.02;
+	rotspeed = 0.05;
 	if (data->moves.w == true)
 		movement_w_press(data, move_spd);
 	if (data->moves.s == true)
@@ -74,9 +76,9 @@ int	movement_press(t_data *data)
 	if (data->moves.d == true)
 		movement_d_press(data, move_spd);
 	if (data->moves.rotate_l == true)
-		rotate_left(data, move_spd);
+		rotate_left(data, rotspeed);
 	if (data->moves.rotate_r == true)
-		rotate_rigth(data, move_spd);
+		rotate_rigth(data, rotspeed);
 	return (0);
 }
 
@@ -93,7 +95,7 @@ void	init_game(t_data *data)
 	direction(data);
 	image_load(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, &handle_press, data);
-	mlx_hook(data->win_ptr, KeyRelease, KeyPressMask, &handle_release, data);
+	mlx_hook(data->win_ptr, KeyRelease, KeyReleaseMask, &handle_release, data);
 	mlx_hook(data->win_ptr, 17, 1L << 17, exit_game, data);
 	mlx_loop_hook(data->mlx_ptr, &ray, data);
 	mlx_loop(data->mlx_ptr);

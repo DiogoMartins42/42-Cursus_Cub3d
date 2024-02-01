@@ -18,7 +18,7 @@ void	image_load2(t_data *data, int i)
 
 	size = 64;
 	data->tex_img[i]->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->map->WE, &size, &size);
+		data->map->we, &size, &size);
 	data->tex_img[i]->addr = \
 			mlx_get_data_addr(data->tex_img[i]->mlx_img, \
 				&data->tex_img[i]->bits_per_pixel, \
@@ -26,7 +26,7 @@ void	image_load2(t_data *data, int i)
 						&data->tex_img[i]->endian);
 	i++;
 	data->tex_img[i]->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->map->EA, &size, &size);
+		data->map->ea, &size, &size);
 	data->tex_img[i]->addr = \
 			mlx_get_data_addr(data->tex_img[i]->mlx_img, \
 				&data->tex_img[i]->bits_per_pixel, \
@@ -42,7 +42,7 @@ void	image_load(t_data *data)
 	i = 0;
 	size = 64;
 	data->tex_img[i]->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->map->NO, &size, &size);
+		data->map->no, &size, &size);
 	data->tex_img[i]->addr = \
 			mlx_get_data_addr(data->tex_img[i]->mlx_img, \
 				&data->tex_img[i]->bits_per_pixel, \
@@ -50,7 +50,7 @@ void	image_load(t_data *data)
 						&data->tex_img[i]->endian);
 	i++;
 	data->tex_img[i]->mlx_img = mlx_xpm_file_to_image(data->mlx_ptr, \
-		data->map->SO, &size, &size);
+		data->map->so, &size, &size);
 	data->tex_img[i]->addr = \
 			mlx_get_data_addr(data->tex_img[i]->mlx_img, \
 				&data->tex_img[i]->bits_per_pixel, \
@@ -83,4 +83,3 @@ void	color_select(t_data *data)
 		return ;
 	}
 }
-

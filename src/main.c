@@ -33,10 +33,10 @@ void	init_map(t_map *map)
 	map->width = 0;
 	map->height = 0;
 	map->map_start = 0;
-	map->NO = 0;
-	map->SO = 0;
-	map->WE = 0;
-	map->EA = 0;
+	map->no = 0;
+	map->so = 0;
+	map->we = 0;
+	map->ea = 0;
 	map->floor_color = 0;
 	map->ceiling_color = 0;
 	map->map_array = NULL;
@@ -53,6 +53,12 @@ t_data	*init_data(void)
 	data = malloc(sizeof(t_data));
 	if (!data)
 		return (0);
+	data->moves.w = false;
+	data->moves.a = false;
+	data->moves.s = false;
+	data->moves.d = false;
+	data->moves.rotate_r = false;
+	data->moves.rotate_l = false;
 	data->mlx_ptr = 0;
 	data->win_ptr = 0;
 	init_images(data);
@@ -60,6 +66,22 @@ t_data	*init_data(void)
 	data->win.y = 720;
 	data->map = NULL;
 	return (data);
+}
+
+void	print_messages(t_data *data, t_map *map)
+{
+	printf("\033[1;32mMap is VALID!\033[0m\n");
+	printf("%s", data->map->map_array[0]);
+	printf("Ceiling_color: %i - %i - %i\n", data->map->ceiling_color[0],
+		data->map->ceiling_color[1], data->map->ceiling_color[2]);
+	printf("Floor_color: %i - %i - %i\n", data->map->floor_color[0],
+		data->map->floor_color[1], data->map->floor_color[2]);
+	printf("Player start pos x: %i y: %i direction: %c\n",
+		map->p_init_x, map->p_init_y, map->p_init_dir);
+	printf("NO texture: %s\n", data->map->no);
+	printf("SO texture: %s\n", data->map->so);
+	printf("WE texture: %s\n", data->map->we);
+	printf("EA texture: %s\n", data->map->ea);
 }
 
 int	main(int ac, char **av)
@@ -75,22 +97,10 @@ int	main(int ac, char **av)
 		if (validate_file(av[1], map))
 		{
 			data->map = map;
-			printf("\033[1;32mMap is VALID!\033[0m\n");
-			printf("%s", data->map->map_array[0]);
-			printf("Ceiling_color: %i - %i - %i\n", data->map->ceiling_color[0],
-				data->map->ceiling_color[1], data->map->ceiling_color[2]);
-			printf("Floor_color: %i - %i - %i\n", data->map->floor_color[0],
-				data->map->floor_color[1], data->map->floor_color[2]);
-			printf("Player start pos x: %i y: %i direction: %c\n",
-				map->p_init_x, map->p_init_y, map->p_init_dir);
-			printf("NO texture: %s\n", data->map->NO);
-			printf("SO texture: %s\n", data->map->SO);
-			printf("WE texture: %s\n", data->map->WE);
-			printf("EA texture: %s\n", data->map->EA);
+			print_messages(data, map);
 			init_game(data);
 		}
-		cleanup_map(map);
-		free(data);
+		free_fail(data, map);
 	}
 	else
 	{

@@ -63,7 +63,6 @@ unsigned int	gix(t_img *img, int x, int y)
 	x * (img->bits_per_pixel / 8))));
 }
 
-
 int	rgb_converter(int red, int green, int blue)
 {
 	return (red << 16 | green << 8 | blue);

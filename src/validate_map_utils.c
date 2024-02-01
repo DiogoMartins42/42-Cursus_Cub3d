@@ -67,13 +67,13 @@ bool	check_all_elements(t_map *map)
 		printf("Error\n\033[1;31mWrong or inexistent Ceiling color\033[0m\n");
 	else if (!map->floor_color)
 		printf("Error\n\033[1;31mWrong or inexistent Floor color\033[0m\n");
-	else if (!map->NO || !is_texture_valid(map->NO))
+	else if (!map->no || !is_texture_valid(map->no))
 		printf("Error\n\033[1;31mWrong or inexistent North texture\033[0m\n");
-	else if (!map->SO || !is_texture_valid(map->SO))
+	else if (!map->so || !is_texture_valid(map->so))
 		printf("Error\n\033[1;31mWrong or inexistent South texture\033[0m\n");
-	else if (!map->WE || !is_texture_valid(map->WE))
+	else if (!map->we || !is_texture_valid(map->we))
 		printf("Error\n\033[1;31mWrong or inexistent West texture\033[0m\n");
-	else if (!map->EA || !is_texture_valid(map->EA))
+	else if (!map->ea || !is_texture_valid(map->ea))
 		printf("Error\n\033[1;31mWrong or inexistent East texture\033[0m\n");
 	else
 		return (true);

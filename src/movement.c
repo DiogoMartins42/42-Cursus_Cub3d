@@ -19,11 +19,17 @@ void	movement_a_press(t_data *data, double move_spd)
 
 	x = (int)(data->ray.pos_x - data->ray.plane_x * move_spd);
 	y = (int) data->ray.pos_y;
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_x -= data->ray.plane_x * move_spd;
 	x = (int) data->ray.pos_x;
 	y = (int)(data->ray.pos_y - data->ray.plane_y * move_spd);
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_y -= data->ray.plane_y * move_spd;
 }
 
@@ -34,11 +40,17 @@ void	movement_d_press(t_data *data, double move_spd)
 
 	x = (int)(data->ray.pos_x + data->ray.plane_x * move_spd);
 	y = (int) data->ray.pos_y;
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_x += data->ray.plane_x * move_spd;
 	x = (int) data->ray.pos_x;
 	y = (int)(data->ray.pos_y + data->ray.plane_y * move_spd);
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_y += data->ray.plane_y * move_spd;
 }
 
@@ -49,11 +61,17 @@ void	movement_s_press(t_data *data, double move_spd)
 
 	x = (int)(data->ray.pos_x - data->ray.dir_x * move_spd);
 	y = (int) data->ray.pos_y;
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_x -= data->ray.dir_x * move_spd;
 	x = (int) data->ray.pos_x;
 	y = (int)(data->ray.pos_y - data->ray.dir_y * move_spd);
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_y -= data->ray.dir_y * move_spd;
 }
 
@@ -64,10 +82,16 @@ void	movement_w_press(t_data *data, double move_spd)
 
 	x = (int)(data->ray.pos_x + data->ray.dir_x * move_spd);
 	y = (int) data->ray.pos_y;
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_x += data->ray.dir_x * move_spd;
 	x = (int) data->ray.pos_x;
 	y = (int)(data->ray.pos_y + data->ray.dir_y * move_spd);
-	if (data->map->map_array[y][x] == '0')
+	if (data->map->map_array[y][x] == 'N' || data->map->map_array[y][x] == '0'\
+		|| data->map->map_array[y][x] == 'E' || \
+			data->map->map_array[y][x] == 'W' || \
+			data->map->map_array[y][x] == 'S')
 		data->ray.pos_y += data->ray.dir_y * move_spd;
 }

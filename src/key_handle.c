@@ -23,9 +23,9 @@ int	handle_release(int key, t_data *data)
 	if (key == XK_d)
 		data->moves.d = false;
 	if (key == XK_Left)
-		data->moves.rotate_l = false;
-	if (key == XK_Right)
 		data->moves.rotate_r = false;
+	if (key == XK_Right)
+		data->moves.rotate_l = false;
 	return (0);
 }
 
@@ -40,9 +40,9 @@ int	handle_press(int key, t_data *data)
 	if (key == XK_d)
 		data->moves.d = true;
 	if (key == XK_Left)
-		data->moves.rotate_l = true;
-	if (key == XK_Right)
 		data->moves.rotate_r = true;
+	if (key == XK_Right)
+		data->moves.rotate_l = true;
 	if (key == XK_Escape)
 		exit_game(data);
 	return (0);

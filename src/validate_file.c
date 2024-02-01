@@ -71,13 +71,13 @@ char	*save_path(char *line, char *trim, char *path, t_map *map)
 bool	add_elements(t_map *map, char *line)
 {
 	if (ft_strnstr(line, "NO ./", 5))
-		map->NO = save_path(line, "NO ./", map->NO, map);
+		map->no = save_path(line, "NO ./", map->no, map);
 	else if (ft_strnstr(line, "SO ./", 5))
-		map->SO = save_path(line, "SO ./", map->SO, map);
+		map->so = save_path(line, "SO ./", map->so, map);
 	else if (ft_strnstr(line, "WE ./", 5))
-		map->WE = save_path(line, "WE ./", map->WE, map);
+		map->we = save_path(line, "WE ./", map->we, map);
 	else if (ft_strnstr(line, "EA ./", 5))
-		map->EA = save_path(line, "EA ./", map->EA, map);
+		map->ea = save_path(line, "EA ./", map->ea, map);
 	else if (ft_strnstr(line, "F ", 2))
 	{
 		if (!map->floor_color)
