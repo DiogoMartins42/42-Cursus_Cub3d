@@ -44,14 +44,14 @@ void	cleanup_map_array(t_map *map)
 
 void	cleanup_map(t_map *map)
 {
-	if (map->NO)
-		free(map->NO);
-	if (map->SO)
-		free(map->SO);
-	if (map->WE)
-		free(map->WE);
-	if (map->EA)
-		free(map->EA);
+	if (map->no)
+		free(map->no);
+	if (map->so)
+		free(map->so);
+	if (map->we)
+		free(map->we);
+	if (map->ea)
+		free(map->ea);
 	if (map->ceiling_color)
 		free(map->ceiling_color);
 	if (map->floor_color)
